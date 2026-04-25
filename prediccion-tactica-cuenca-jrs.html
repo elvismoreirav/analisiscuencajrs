@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cuenca JRS · Predicción Táctica · Fecha 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-0: #06080e;
+    --bg-1: #0c1018;
+    --bg-2: #121822;
+    --bg-3: #1a212e;
+    --line: #1e2738;
+    --text: #eceff4;
+    --text-dim: #8b95a8;
+    --text-mute: #505c72;
+    --accent: #3b82f6;
+    --accent-dim: #1d4ed8;
+    --accent-glow: rgba(59, 130, 246, 0.25);
+    --club-primary: #1e3a5f;
+    --warn: #f59e0b;
+    --danger: #ef4444;
+    --success: #22c55e;
+    --cyan: #06b6d4;
+    --purple: #a855f7;
+    --pitch-a: #0c5a26;
+    --pitch-b: #074319;
+    --radius-m: 10px;
+    --radius-l: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-0);
+    color: var(--text);
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(59,130,246,0.06), transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(168,85,247,0.04), transparent 50%),
+      var(--bg-0);
+    background-attachment: fixed;
+  }
+
+  ::selection { background: var(--accent); color: #fff; }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 28px 80px;
+  }
+
+  /* ==================== HERO ==================== */
+  .hero {
+    text-align: center;
+    padding: 60px 0 50px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(59,130,246,0.08), transparent 60%);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    padding: 6px 16px;
+    border: 1px solid rgba(59,130,246,0.3);
+    border-radius: 999px;
+    background: rgba(59,130,246,0.06);
+  }
+  .hero-badge::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+  .hero-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(44px, 8vw, 82px);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero-title span {
+    background: linear-gradient(90deg, var(--accent), var(--cyan), var(--purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--text-dim);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ==================== SECTION ==================== */
+  .section {
+    margin-bottom: 56px;
+  }
+
+  .sh {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sh-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.2px var(--accent);
+    letter-spacing: -1px;
+  }
+  .sh-text {
+    display: flex;
+    flex-direction: column;
+  }
+  .sh-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .sh-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--text-mute);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ==================== PREDICTED XI ==================== */
+  .xi-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 24px;
+  }
+
+  .pitch-wrap {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-l);
+    padding: 22px;
+  }
+  .pitch-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .pitch-label-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .pitch-label-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-mute);
+    letter-spacing: 1.5px;
+  }
+
+  .pitch {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(180deg, var(--pitch-a), var(--pitch-b));
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.08), inset 0 0 80px rgba(0,0,0,0.35);
+  }
+  .pitch::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent 0, transparent 8.33%, rgba(255,255,255,0.025) 8.33%, rgba(255,255,255,0.025) 16.66%);
+    pointer-events: none;
+  }
+  .p-line { position: absolute; border-color: rgba(255,255,255,0.2); border-style: solid; border-width: 0; }
+  .p-halfway { top: 50%; left: 0; right: 0; border-top-width: 1.5px; }
+  .p-circle { top: 50%; left: 50%; width: 22%; aspect-ratio: 1; border-width: 1.5px; border-radius: 50%; transform: translate(-50%,-50%); }
+  .p-box-top { top: 0; left: 50%; width: 58%; height: 15%; border-left-width: 1.5px; border-right-width: 1.5px; border-bottom-width: 1.5px; transform: translateX(-50%); }
+  .p-area-top { top: 0; left: 50%; width: 26%; height: 6%; border-left-width: 1.5px; border-right-width: 1.5px; border-bottom-width: 1.5px; transform: translateX(-50%); }
+
+  .pl {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+    animation: plFade 0.6s ease backwards;
+  }
+  @keyframes plFade {
+    from { opacity: 0; transform: translate(-50%, calc(-50% - 8px)); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+  }
+  .pl:nth-child(2) { animation-delay:0.06s; }
+  .pl:nth-child(3) { animation-delay:0.12s; }
+  .pl:nth-child(4) { animation-delay:0.18s; }
+  .pl:nth-child(5) { animation-delay:0.24s; }
+  .pl:nth-child(6) { animation-delay:0.3s; }
+  .pl:nth-child(7) { animation-delay:0.36s; }
+  .pl:nth-child(8) { animation-delay:0.42s; }
+  .pl:nth-child(9) { animation-delay:0.48s; }
+  .pl:nth-child(10) { animation-delay:0.54s; }
+  .pl:nth-child(11) { animation-delay:0.6s; }
+  .pl:nth-child(12) { animation-delay:0.66s; }
+
+  .pl-dorsal {
+    width: 46px; height: 46px;
+    background: #fff;
+    color: var(--club-primary);
+    border: 3px solid var(--accent);
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.25), 0 6px 14px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  .pl:hover .pl-dorsal { transform: scale(1.1); transition: 0.15s; }
+  .pl-gk .pl-dorsal { background: #1a1a1a; color: var(--warn); border-color: var(--warn); }
+  .pl-name {
+    margin-top: 5px;
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .pl-conf {
+    margin-top: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  .pl-conf.high { background: rgba(34,197,94,0.2); color: var(--success); border: 1px solid rgba(34,197,94,0.4); }
+  .pl-conf.mid { background: rgba(245,158,11,0.2); color: var(--warn); border: 1px solid rgba(245,158,11,0.4); }
+  .pl-conf.low { background: rgba(239,68,68,0.15); color: var(--danger); border: 1px solid rgba(239,68,68,0.4); }
+  .pl-captain {
+    position: absolute;
+    top: -6px; left: -10px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--club-primary);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--club-primary);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.45);
+  }
+
+  /* ==================== CONFIDENCE PANEL ==================== */
+  .conf-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .conf-card {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+    padding: 18px 20px;
+  }
+  .conf-card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .conf-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: grid; place-items: center;
+    font-size: 14px;
+  }
+  .conf-icon.blue { background: var(--accent); color: #fff; }
+  .conf-icon.amber { background: var(--warn); color: #000; }
+  .conf-icon.red { background: var(--danger); color: #fff; }
+  .conf-icon.green { background: var(--success); color: #fff; }
+  .conf-icon.purple { background: var(--purple); color: #fff; }
+  .conf-card-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    flex: 1;
+  }
+
+  .conf-row {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(30,39,56,0.4);
+  }
+  .conf-row:last-child { border-bottom: none; }
+  .conf-dorsal {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    background: var(--bg-3);
+    border-radius: 4px;
+    padding: 3px 0;
+    text-align: center;
+  }
+  .conf-name {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+  }
+  .conf-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .conf-pct.high { color: var(--success); }
+  .conf-pct.mid { color: var(--warn); }
+  .conf-pct.low { color: var(--danger); }
+
+  /* ==================== GRID LAYOUTS ==================== */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  .card {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .card.blue::before { background: linear-gradient(90deg, var(--accent), transparent); }
+  .card.amber::before { background: linear-gradient(90deg, var(--warn), transparent); }
+  .card.red::before { background: linear-gradient(90deg, var(--danger), transparent); }
+  .card.green::before { background: linear-gradient(90deg, var(--success), transparent); }
+  .card.purple::before { background: linear-gradient(90deg, var(--purple), transparent); }
+  .card.cyan::before { background: linear-gradient(90deg, var(--cyan), transparent); }
+
+  .card-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .card-tag.blue { color: var(--accent); background: rgba(59,130,246,0.08); }
+  .card-tag.amber { color: var(--warn); background: rgba(245,158,11,0.08); }
+  .card-tag.red { color: var(--danger); background: rgba(239,68,68,0.08); }
+  .card-tag.green { color: var(--success); background: rgba(34,197,94,0.08); }
+  .card-tag.purple { color: var(--purple); background: rgba(168,85,247,0.08); }
+  .card-tag.cyan { color: var(--cyan); background: rgba(6,182,212,0.08); }
+
+  .card-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .card-body {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.65;
+  }
+  .card-body strong { color: var(--accent); font-weight: 600; }
+  .card-body .warn { color: var(--warn); }
+  .card-body .danger { color: var(--danger); }
+  .card-body .success { color: var(--success); }
+
+  /* ==================== SUBSTITUTION TIMELINE ==================== */
+  .sub-timeline {
+    display: flex;
+    align-items: flex-end;
+    height: 200px;
+    gap: 0;
+    padding: 0 20px;
+    position: relative;
+    margin-top: 20px;
+  }
+  .sub-timeline::before {
+    content: '';
+    position: absolute;
+    bottom: 44px;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: var(--line);
+  }
+
+  .st-segment {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .st-bar {
+    width: 80%;
+    max-width: 60px;
+    border-radius: 6px 6px 0 0;
+    position: relative;
+    transition: all 0.4s ease;
+    min-height: 4px;
+  }
+  .st-bar:hover {
+    filter: brightness(1.3);
+    transform: scaleY(1.05);
+    transform-origin: bottom;
+  }
+  .st-bar-label {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .st-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--text-mute);
+    letter-spacing: 1px;
+    margin-top: 12px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* ==================== DEPENDENCY BARS ==================== */
+  .dep-list { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+  .dep-row { display: grid; grid-template-columns: 100px 1fr 50px; align-items: center; gap: 14px; }
+  .dep-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dep-track {
+    height: 22px;
+    background: var(--bg-3);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .dep-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+    transition: width 0.8s ease;
+  }
+  .dep-fill.critical { background: linear-gradient(90deg, var(--danger), #f87171); }
+  .dep-fill.high { background: linear-gradient(90deg, var(--warn), #fbbf24); }
+  .dep-fill.medium { background: linear-gradient(90deg, var(--accent), #60a5fa); }
+  .dep-fill.low { background: linear-gradient(90deg, var(--success), #4ade80); }
+  .dep-pct {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: right;
+  }
+
+  /* ==================== GOAL ZONE CHART ==================== */
+  .zone-chart {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin-top: 16px;
+  }
+  .zone-half {
+    background: var(--bg-2);
+    border-radius: 6px;
+    padding: 18px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+  .zone-half:hover { transform: translateY(-2px); }
+  .zone-half::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.15;
+  }
+  .zone-half.hot::before { height: 60%; background: linear-gradient(0deg, var(--danger), transparent); }
+  .zone-half.warm::before { height: 40%; background: linear-gradient(0deg, var(--warn), transparent); }
+  .zone-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .zone-value {
+    font-family: 'Oswald', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    position: relative;
+  }
+  .zone-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 6px;
+    position: relative;
+  }
+
+  /* ==================== RISK TABLE ==================== */
+  .risk-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+  }
+  .risk-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    padding: 10px 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+  }
+  .risk-table td {
+    padding: 10px 8px;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(30,39,56,0.4);
+    vertical-align: middle;
+  }
+  .risk-table tr:hover { background: rgba(59,130,246,0.03); }
+  .risk-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  .risk-dot.danger { background: var(--danger); box-shadow: 0 0 6px var(--danger); }
+  .risk-dot.warn { background: var(--warn); box-shadow: 0 0 6px var(--warn); }
+  .risk-dot.ok { background: var(--success); }
+
+  /* ==================== FOOTER ==================== */
+  .footer {
+    margin-top: 60px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-mute);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ==================== RESPONSIVE ==================== */
+  @media (max-width: 1000px) {
+    .xi-layout { grid-template-columns: 1fr; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ==================== PRINT ==================== */
+  @media print {
+    @page { size: A4 portrait; margin: 8mm 7mm; }
+    *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; animation: none !important; }
+    .hero { padding: 20px 0 30px !important; }
+    .hero-title { font-size: 40px !important; }
+    .section { margin-bottom: 24px !important; }
+    .card { padding: 14px !important; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ==================== HERO ==================== -->
+  <div class="hero">
+    <div class="hero-badge">Scouting Intelligence · Modelo Predictivo · 5 Fechas</div>
+    <h1 class="hero-title">
+      Predicción<br><span>Táctica F6</span>
+    </h1>
+    <p class="hero-sub">
+      Proyección del comportamiento táctico de <strong style="color:var(--accent)">Cuenca JRS</strong> para la Fecha 6, basada en el análisis de patrones, rotaciones y tendencias de las primeras 5 jornadas bajo la dirección de <strong style="color:var(--accent)">Leonardo Vanegas</strong>.
+    </p>
+  </div>
+
+  <!-- ==================== 01 · XI PREDICHO ==================== -->
+  <section class="section">
+    <div class="sh">
+      <div class="sh-num">01</div>
+      <div class="sh-text">
+        <div class="sh-title">XI Predicho · Fecha 6</div>
+        <div class="sh-sub">Probabilidad de titularidad basada en 5 fechas · Sistema 4-3-3</div>
+      </div>
+    </div>
+
+    <div class="xi-layout">
+      <div class="pitch-wrap">
+        <div class="pitch-label">
+          <div class="pitch-label-title">Pizarra Predicha · 4-3-3</div>
+          <div class="pitch-label-meta">Confianza: color del badge bajo el nombre</div>
+        </div>
+        <div class="pitch">
+          <div class="p-line p-halfway"></div>
+          <div class="p-line p-circle"></div>
+          <div class="p-line p-box-top"></div>
+          <div class="p-line p-area-top"></div>
+
+          <!-- GK -->
+          <div class="pl pl-gk" style="left:50%;top:10%;">
+            <div class="pl-dorsal">12</div>
+            <div class="pl-name">J. VILLAFUERTE</div>
+            <div class="pl-conf high">100%</div>
+          </div>
+          <!-- DEF -->
+          <div class="pl" style="left:20%;top:30%;">
+            <div class="pl-dorsal">25</div>
+            <div class="pl-name">D. ORTIZ</div>
+            <div class="pl-conf high">95%</div>
+          </div>
+          <div class="pl" style="left:40%;top:30%;">
+            <div class="pl-dorsal">18</div>
+            <div class="pl-name">X. ARMIJOS</div>
+            <div class="pl-conf high">92%</div>
+          </div>
+          <div class="pl" style="left:60%;top:30%;">
+            <div class="pl-dorsal">20</div>
+            <div class="pl-name">E. GARCETE</div>
+            <div class="pl-conf high">100%</div>
+          </div>
+          <div class="pl" style="left:80%;top:30%;">
+            <div class="pl-dorsal">3</div>
+            <div class="pl-name">K. NAZARENO</div>
+            <div class="pl-conf mid">72%</div>
+          </div>
+          <!-- MID -->
+          <div class="pl" style="left:30%;top:55%;">
+            <div class="pl-dorsal">33</div>
+            <div class="pl-name">H. MERCADO</div>
+            <div class="pl-conf high">88%</div>
+          </div>
+          <div class="pl" style="left:50%;top:55%;">
+            <div class="pl-dorsal">5<div class="pl-captain">C</div></div>
+            <div class="pl-name">J. MEDINA</div>
+            <div class="pl-conf high">100%</div>
+          </div>
+          <div class="pl" style="left:70%;top:55%;">
+            <div class="pl-dorsal">27</div>
+            <div class="pl-name">O. MANTILLA</div>
+            <div class="pl-conf mid">65%</div>
+          </div>
+          <!-- ATK -->
+          <div class="pl" style="left:25%;top:82%;">
+            <div class="pl-dorsal">10</div>
+            <div class="pl-name">J. PRECIADO</div>
+            <div class="pl-conf mid">70%</div>
+          </div>
+          <div class="pl" style="left:50%;top:82%;">
+            <div class="pl-dorsal">21</div>
+            <div class="pl-name">K. VALENCIA</div>
+            <div class="pl-conf high">98%</div>
+          </div>
+          <div class="pl" style="left:75%;top:82%;">
+            <div class="pl-dorsal">11</div>
+            <div class="pl-name">J. UCHUARI</div>
+            <div class="pl-conf high">90%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="conf-panel">
+        <div class="conf-card">
+          <div class="conf-card-head">
+            <div class="conf-icon green">✓</div>
+            <div class="conf-card-title">Titulares seguros</div>
+          </div>
+          <div class="conf-row"><div class="conf-dorsal">12</div><div class="conf-name">Villafuerte</div><div class="conf-pct high">100%</div></div>
+          <div class="conf-row"><div class="conf-dorsal">20</div><div class="conf-name">Garcete</div><div class="conf-pct high">100%</div></div>
+          <div class="conf-row"><div class="conf-dorsal">5</div><div class="conf-name">Medina ©</div><div class="conf-pct high">100%</div></div>
+          <div class="conf-row"><div class="conf-dorsal">21</div><div class="conf-name">Valencia</div><div class="conf-pct high">98%</div></div>
+          <div class="conf-row"><div class="conf-dorsal">25</div><div class="conf-name">Ortiz</div><div class="conf-pct high">95%</div></div>
+          <div class="conf-row"><div class="conf-dorsal">18</div><div class="conf-name">Armijos</div><div class="conf-pct high">92%</div></div>
+          <div class="conf-row"><div class="conf-dorsal">11</div><div class="conf-name">Uchuari</div><div class="conf-pct high">90%</div></div>
+        </div>
+
+        <div class="conf-card">
+          <div class="conf-card-head">
+            <div class="conf-icon amber">⚠</div>
+            <div class="conf-card-title">Posiciones en duda</div>
+          </div>
+          <div class="conf-row"><div class="conf-dorsal">33</div><div class="conf-name">Mercado</div><div class="conf-pct mid">88%</div></div>
+          <div class="conf-row"><div class="conf-dorsal">3</div><div class="conf-name">Nazareno</div><div class="conf-pct mid">72%</div></div>
+          <div class="conf-row"><div class="conf-dorsal">10</div><div class="conf-name">Preciado</div><div class="conf-pct mid">70%</div></div>
+          <div class="conf-row"><div class="conf-dorsal">27</div><div class="conf-name">Mantilla</div><div class="conf-pct mid">65%</div></div>
+        </div>
+
+        <div class="conf-card">
+          <div class="conf-card-head">
+            <div class="conf-icon purple">↔</div>
+            <div class="conf-card-title">Alternativas probables</div>
+          </div>
+          <div class="conf-row"><div class="conf-dorsal">7</div><div class="conf-name">Zambrano</div><div class="conf-pct low">35%</div></div>
+          <div class="conf-row"><div class="conf-dorsal">99</div><div class="conf-name">Bone</div><div class="conf-pct low">30%</div></div>
+          <div class="conf-row"><div class="conf-dorsal">14</div><div class="conf-name">González</div><div class="conf-pct low">28%</div></div>
+          <div class="conf-row"><div class="conf-dorsal">55</div><div class="conf-name">Mosquera</div><div class="conf-pct low">20%</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 02 · PATRÓN DE CAMBIOS ==================== -->
+  <section class="section">
+    <div class="sh">
+      <div class="sh-num">02</div>
+      <div class="sh-text">
+        <div class="sh-title">Patrón de Sustituciones</div>
+        <div class="sh-sub">Frecuencia de cambios por ventana temporal · Predicción F6</div>
+      </div>
+    </div>
+
+    <div class="card blue">
+      <div class="sub-timeline">
+        <div class="st-segment">
+          <div class="st-bar" style="height:30px; background:var(--bg-3);">
+            <div class="st-bar-label" style="color:var(--text-mute);">0</div>
+          </div>
+          <div class="st-label">0'–44'</div>
+        </div>
+        <div class="st-segment">
+          <div class="st-bar" style="height:80px; background:linear-gradient(180deg, var(--accent), var(--accent-dim));">
+            <div class="st-bar-label" style="color:var(--accent);">40%</div>
+          </div>
+          <div class="st-label">45'–50'</div>
+        </div>
+        <div class="st-segment">
+          <div class="st-bar" style="height:30px; background:var(--bg-3);">
+            <div class="st-bar-label" style="color:var(--text-mute);">5%</div>
+          </div>
+          <div class="st-label">51'–59'</div>
+        </div>
+        <div class="st-segment">
+          <div class="st-bar" style="height:130px; background:linear-gradient(180deg, var(--warn), #d97706);">
+            <div class="st-bar-label" style="color:var(--warn);">75%</div>
+          </div>
+          <div class="st-label">60'–70'</div>
+        </div>
+        <div class="st-segment">
+          <div class="st-bar" style="height:50px; background:linear-gradient(180deg, var(--cyan), #0891b2);">
+            <div class="st-bar-label" style="color:var(--cyan);">35%</div>
+          </div>
+          <div class="st-label">71'–79'</div>
+        </div>
+        <div class="st-segment">
+          <div class="st-bar" style="height:120px; background:linear-gradient(180deg, var(--danger), #dc2626);">
+            <div class="st-bar-label" style="color:var(--danger);">70%</div>
+          </div>
+          <div class="st-label">80'–90'</div>
+        </div>
+      </div>
+      <div style="margin-top:28px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px;">
+        <div style="background:var(--bg-2); padding:14px; border-radius:8px; text-align:center;">
+          <div style="font-family:'Oswald',sans-serif; font-size:32px; font-weight:700; color:var(--accent);">4–5</div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:var(--text-mute); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px;">Cambios esperados</div>
+        </div>
+        <div style="background:var(--bg-2); padding:14px; border-radius:8px; text-align:center;">
+          <div style="font-family:'Oswald',sans-serif; font-size:32px; font-weight:700; color:var(--warn);">65'</div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:var(--text-mute); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px;">Minuto pico</div>
+        </div>
+        <div style="background:var(--bg-2); padding:14px; border-radius:8px; text-align:center;">
+          <div style="font-family:'Oswald',sans-serif; font-size:32px; font-weight:700; color:var(--cyan);">2×</div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:var(--text-mute); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px;">Dobles frecuentes</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 03 · AMENAZA GOLEADORA ==================== -->
+  <section class="section">
+    <div class="sh">
+      <div class="sh-num">03</div>
+      <div class="sh-text">
+        <div class="sh-title">Amenaza Goleadora</div>
+        <div class="sh-sub">Distribución temporal de goles y jugadores peligrosos</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card red">
+        <div class="card-tag red">Zonas de peligro</div>
+        <div class="card-title">Distribución temporal</div>
+        <div class="card-body" style="margin-bottom:16px;">
+          <strong>7 goles en 5 partidos</strong> (1.4 por partido). El equipo es más letal en los <strong class="danger">minutos finales de cada tiempo</strong> — 4 de los 7 goles llegaron entre el 35' y el 45+2'.
+        </div>
+        <div class="zone-chart">
+          <div class="zone-half hot">
+            <div class="zone-label">1er Tiempo</div>
+            <div class="zone-value" style="color:var(--danger);">5</div>
+            <div class="zone-pct" style="color:var(--danger);">71% de los goles</div>
+          </div>
+          <div class="zone-half warm">
+            <div class="zone-label">2do Tiempo</div>
+            <div class="zone-value" style="color:var(--warn);">2</div>
+            <div class="zone-pct" style="color:var(--warn);">29% de los goles</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card amber">
+        <div class="card-tag amber">Goleadores</div>
+        <div class="card-title">Dependencia ofensiva</div>
+        <div class="dep-list">
+          <div class="dep-row">
+            <div class="dep-name">#21 Valencia</div>
+            <div class="dep-track"><div class="dep-fill critical" style="width:57%;">4 goles</div></div>
+            <div class="dep-pct" style="color:var(--danger);">57%</div>
+          </div>
+          <div class="dep-row">
+            <div class="dep-name">#10 Preciado</div>
+            <div class="dep-track"><div class="dep-fill medium" style="width:14%;">1</div></div>
+            <div class="dep-pct" style="color:var(--accent);">14%</div>
+          </div>
+          <div class="dep-row">
+            <div class="dep-name">#11 Uchuari</div>
+            <div class="dep-track"><div class="dep-fill medium" style="width:14%;">1</div></div>
+            <div class="dep-pct" style="color:var(--accent);">14%</div>
+          </div>
+          <div class="dep-row">
+            <div class="dep-name">Otros</div>
+            <div class="dep-track"><div class="dep-fill low" style="width:14%;">1</div></div>
+            <div class="dep-pct" style="color:var(--success);">14%</div>
+          </div>
+        </div>
+        <div class="card-body" style="margin-top:18px; padding-top:14px; border-top:1px solid var(--line);">
+          <strong class="danger">Riesgo clave:</strong> si Valencia es neutralizado, el equipo pierde el 57% de su producción ofensiva. Preciado y Uchuari son amenazas secundarias pero inconsistentes.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 04 · RIESGO DISCIPLINARIO ==================== -->
+  <section class="section">
+    <div class="sh">
+      <div class="sh-num">04</div>
+      <div class="sh-text">
+        <div class="sh-title">Riesgo Disciplinario</div>
+        <div class="sh-sub">Acumulación de amarillas · Peligro de sanción</div>
+      </div>
+    </div>
+
+    <div class="card amber">
+      <div class="card-body" style="margin-bottom:18px;">
+        <strong>11 amarillas en 5 partidos</strong> (2.2 por partido). Tres jugadores con <strong class="danger">2 tarjetas acumuladas</strong> están en riesgo de suspensión ante una tercera amonestación.
+      </div>
+      <table class="risk-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Jugador</th>
+            <th>Amarillas</th>
+            <th>Fechas</th>
+            <th>Riesgo</th>
+            <th>Predicción F6</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>3</strong></td>
+            <td><strong>K. NAZARENO</strong></td>
+            <td><span class="risk-dot danger"></span>2</td>
+            <td style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim);">F4 (2'), F5 (51')</td>
+            <td style="color:var(--danger); font-weight:700;">ALTO</td>
+            <td style="font-size:12px; color:var(--text-dim);">Podría rotar con González (#14) para preservarlo</td>
+          </tr>
+          <tr>
+            <td><strong>10</strong></td>
+            <td><strong>J. PRECIADO</strong></td>
+            <td><span class="risk-dot danger"></span>2</td>
+            <td style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim);">F2 (61'), F4 (82')</td>
+            <td style="color:var(--danger); font-weight:700;">ALTO</td>
+            <td style="font-size:12px; color:var(--text-dim);">Bone (#99) es su reemplazo natural en LW</td>
+          </tr>
+          <tr>
+            <td><strong>55</strong></td>
+            <td><strong>S. MOSQUERA</strong></td>
+            <td><span class="risk-dot danger"></span>2</td>
+            <td style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim);">F2 (8'), F5 (63')</td>
+            <td style="color:var(--warn); font-weight:700;">MEDIO</td>
+            <td style="font-size:12px; color:var(--text-dim);">Actualmente suplente, menor exposición</td>
+          </tr>
+          <tr>
+            <td><strong>5</strong></td>
+            <td><strong>J. MEDINA ©</strong></td>
+            <td><span class="risk-dot warn"></span>1</td>
+            <td style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim);">F4 (61')</td>
+            <td style="color:var(--warn); font-weight:700;">MEDIO</td>
+            <td style="font-size:12px; color:var(--text-dim);">Inamovible como capitán, siempre juega</td>
+          </tr>
+          <tr>
+            <td><strong>33</strong></td>
+            <td><strong>H. MERCADO</strong></td>
+            <td><span class="risk-dot warn"></span>1</td>
+            <td style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim);">F3 (59')</td>
+            <td style="color:var(--text-mute); font-weight:700;">BAJO</td>
+            <td style="font-size:12px; color:var(--text-dim);">Sin patrón de reincidencia</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==================== 05 · PATRONES TÁCTICOS ==================== -->
+  <section class="section">
+    <div class="sh">
+      <div class="sh-num">05</div>
+      <div class="sh-text">
+        <div class="sh-title">Patrones Tácticos Predichos</div>
+        <div class="sh-sub">Tendencias extraídas de 5 jornadas · Recomendaciones para el rival</div>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card blue">
+        <div class="card-tag blue">Estructura</div>
+        <div class="card-title">4-3-3 garantizado</div>
+        <div class="card-body">
+          Vanegas no ha variado el sistema en <strong>5 de 5 partidos</strong>. Probabilidad de cambio de formación: <strong>&lt;5%</strong>. El equipo construye desde la posesión con Medina como eje distribuidor y doble interior libre para asociarse con los extremos.
+        </div>
+      </div>
+
+      <div class="card green">
+        <div class="card-tag green">Bloque bajo</div>
+        <div class="card-title">Garcete: ancla defensiva</div>
+        <div class="card-body">
+          Con <strong>450 minutos sin ser sustituido jamás</strong>, Garcete es el jugador más inalterable de la plantilla. La línea Ortiz-Armijos-Garcete-Nazareno lleva 3 fechas consecutivas. Vanegas confía en una defensa de 4 establecida, sin improvisaciones.
+        </div>
+      </div>
+
+      <div class="card purple">
+        <div class="card-tag purple">Transición</div>
+        <div class="card-title">Ataque directo vía Valencia</div>
+        <div class="card-body">
+          El patrón ofensivo canaliza balones hacia <strong>Valencia (#21) como referente central</strong>. Uchuari y Preciado/Bone se incorporan por fuera. Los goles llegan por <strong class="warn">jugada rápida, no por posesión prolongada</strong> — evidenciado por tantos tempranos (3', 35').
+        </div>
+      </div>
+
+      <div class="card cyan">
+        <div class="card-tag cyan">Debilidad</div>
+        <div class="card-title">Lateral derecho vulnerable</div>
+        <div class="card-body">
+          <strong class="danger">Nazareno acumula 2 amarillas</strong> en 3 partidos como titular (F3-F5). Su perfil agresivo lo expone a tarjetas tempranas (2' en F4). Si es presionado, fuerza faltas que desgastan al equipo y generan riesgo de expulsión.
+        </div>
+      </div>
+
+      <div class="card amber">
+        <div class="card-tag amber">Fatiga</div>
+        <div class="card-title">Uchuari siempre sale</div>
+        <div class="card-body">
+          Pese a ser titular en las <strong>5 fechas</strong>, Uchuari fue sustituido en <strong>todas</strong> (promedio min 69). Es el primer extremo en salir siempre. Bone, Márquez o Mosquera lo reemplazan. Su rendimiento baja tras los 65' — ventana de oportunidad para el rival.
+        </div>
+      </div>
+
+      <div class="card red">
+        <div class="card-tag red">Recambio</div>
+        <div class="card-title">Banco con roles definidos</div>
+        <div class="card-body">
+          <strong>Alvarado (#8)</strong> es el relevo de Medina — entra en F3 (80'), F4 (82'), F5 (83'). <strong>Bone (#99)</strong> alterna entre titular e impacto. <strong>Mosquera (#55)</strong> es el comodín defensivo/mediocampo. El banco tiene roles claros pero <strong class="danger">poca capacidad de cambiar el sistema</strong>.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 06 · DEPENDENCIA ==================== -->
+  <section class="section">
+    <div class="sh">
+      <div class="sh-num">06</div>
+      <div class="sh-text">
+        <div class="sh-title">Índice de Dependencia</div>
+        <div class="sh-sub">Jugadores cuya ausencia impactaría más al rendimiento</div>
+      </div>
+    </div>
+
+    <div class="card blue">
+      <div class="dep-list">
+        <div class="dep-row">
+          <div class="dep-name">#21 Valencia</div>
+          <div class="dep-track"><div class="dep-fill critical" style="width:96%;">5/5 titular · 4 goles · 57% de producción</div></div>
+          <div class="dep-pct" style="color:var(--danger);">96</div>
+        </div>
+        <div class="dep-row">
+          <div class="dep-name">#5 Medina ©</div>
+          <div class="dep-track"><div class="dep-fill critical" style="width:92%;">5/5 titular · capitán · eje distribuidor</div></div>
+          <div class="dep-pct" style="color:var(--danger);">92</div>
+        </div>
+        <div class="dep-row">
+          <div class="dep-name">#20 Garcete</div>
+          <div class="dep-track"><div class="dep-fill high" style="width:88%;">450' · nunca sale · ancla defensiva</div></div>
+          <div class="dep-pct" style="color:var(--warn);">88</div>
+        </div>
+        <div class="dep-row">
+          <div class="dep-name">#12 Villafuerte</div>
+          <div class="dep-track"><div class="dep-fill high" style="width:82%;">450' · sin recambio probado</div></div>
+          <div class="dep-pct" style="color:var(--warn);">82</div>
+        </div>
+        <div class="dep-row">
+          <div class="dep-name">#11 Uchuari</div>
+          <div class="dep-track"><div class="dep-fill medium" style="width:65%;">5/5 titular · 1 gol · siempre sustituido</div></div>
+          <div class="dep-pct" style="color:var(--accent);">65</div>
+        </div>
+        <div class="dep-row">
+          <div class="dep-name">#33 Mercado</div>
+          <div class="dep-track"><div class="dep-fill medium" style="width:58%;">4/5 titular · equilibrio en mediocampo</div></div>
+          <div class="dep-pct" style="color:var(--accent);">58</div>
+        </div>
+        <div class="dep-row">
+          <div class="dep-name">#10 Preciado</div>
+          <div class="dep-track"><div class="dep-fill low" style="width:48%;">4/5 titular · 1 gol · reemplazable por Bone</div></div>
+          <div class="dep-pct" style="color:var(--success);">48</div>
+        </div>
+        <div class="dep-row">
+          <div class="dep-name">#18 Armijos</div>
+          <div class="dep-track"><div class="dep-fill low" style="width:44%;">3/5 titular · B. González como alternativa</div></div>
+          <div class="dep-pct" style="color:var(--success);">44</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 07 · RESUMEN EJECUTIVO ==================== -->
+  <section class="section">
+    <div class="sh">
+      <div class="sh-num">07</div>
+      <div class="sh-text">
+        <div class="sh-title">Resumen Ejecutivo para el Rival</div>
+        <div class="sh-sub">Guía rápida de neutralización · Enfoque sobre debilidades</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card green">
+        <div class="card-tag green">Cómo atacarlos</div>
+        <div class="card-title">Recomendaciones ofensivas</div>
+        <div class="card-body" style="display:flex; flex-direction:column; gap:12px;">
+          <div>
+            <strong>1. Explotar el lateral derecho.</strong> Nazareno (2 amarillas) es agresivo y se compromete pronto. Provocar faltas en esa zona puede generar tarjeta temprana y ventaja numérica o psicológica.
+          </div>
+          <div>
+            <strong>2. Presionar tras el minuto 65'.</strong> Vanegas siempre sustituye a Uchuari y reorganiza el ataque en esa ventana. Los 5 minutos post-cambio son de adaptación — momento ideal para acelerar.
+          </div>
+          <div>
+            <strong>3. Atacar por la izquierda.</strong> Ortiz (#25) no es lateral natural (incorporado en F2). Generar superioridad por esa banda puede forzar errores posicionales.
+          </div>
+        </div>
+      </div>
+
+      <div class="card red">
+        <div class="card-tag red">Cómo defenderse</div>
+        <div class="card-title">Recomendaciones defensivas</div>
+        <div class="card-body" style="display:flex; flex-direction:column; gap:12px;">
+          <div>
+            <strong>1. Marcar a Valencia (#21) con doble marca.</strong> Es responsable del 57% de los goles. Si se le neutraliza, la capacidad ofensiva se reduce drásticamente.
+          </div>
+          <div>
+            <strong>2. Atención máxima entre el 35' y 45+2'.</strong> El 71% de sus goles llegan en el primer tiempo, especialmente en los minutos finales. No bajar la concentración antes del descanso.
+          </div>
+          <div>
+            <strong>3. Controlar a Medina (#5) en la distribución.</strong> Es el capitán y cerebro táctico. Si se corta su pase hacia los extremos, el equipo pierde fluidez en transición.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    Cuenca JRS · Predicción Táctica · Modelo basado en 5 Fechas · Temporada 2025 · Formato Wyscout
+  </div>
+
+</div>
+
+</body>
+</html>
