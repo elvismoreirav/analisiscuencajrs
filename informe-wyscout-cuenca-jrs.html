@@ -1064,6 +1064,166 @@
   .event-icon { font-size: 16px; }
   .event-empty { text-align: center; padding: 24px 0; color: var(--text-mute); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
 
+  /* ==================== ROSTER (plantilla convocada) ==================== */
+  .roster-panel {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-l);
+    padding: 22px 26px;
+    margin-top: 22px;
+  }
+
+  .roster-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .roster-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .roster-title-icon {
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    background: var(--accent);
+    color: #fff;
+    display: grid; place-items: center;
+    font-size: 13px;
+  }
+  .roster-summary {
+    display: flex;
+    gap: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-mute);
+  }
+  .roster-summary strong { color: var(--text); font-family: 'Oswald', sans-serif; font-size: 14px; margin-right: 4px; }
+
+  .roster-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .roster-col-head {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .roster-col-head .col-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+  .col-tag.starter { background: rgba(59,130,246,0.18); color: var(--accent); }
+  .col-tag.subin { background: rgba(34,197,94,0.16); color: var(--success); }
+  .col-tag.bench { background: var(--bg-3); color: var(--text-mute); }
+
+  .roster-list { display: flex; flex-direction: column; gap: 4px; }
+
+  .roster-row {
+    display: grid;
+    grid-template-columns: 30px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background: var(--bg-2);
+    border-radius: 5px;
+    border-left: 2px solid var(--line);
+    transition: all 0.15s;
+  }
+  .roster-row:hover { background: var(--bg-3); }
+  .roster-row.is-starter { border-left-color: var(--accent); }
+  .roster-row.is-subin { border-left-color: var(--success); }
+  .roster-row.is-captain { border-left-color: var(--warn); background: rgba(245,158,11,0.04); }
+
+  .roster-dorsal {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    background: var(--bg-3);
+    border-radius: 4px;
+    padding: 4px 0;
+    text-align: center;
+    color: var(--text);
+  }
+  .roster-row.is-starter .roster-dorsal { background: var(--accent); color: #fff; }
+  .roster-row.is-subin .roster-dorsal { background: var(--success); color: #fff; }
+  .roster-row.is-gk .roster-dorsal { background: var(--warn); color: #000; }
+
+  .roster-name {
+    font-size: 11.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+  }
+  .roster-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--text-mute);
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  .roster-stats {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+  .roster-min {
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .roster-row.is-subin .roster-min { color: var(--success); }
+  .roster-icon {
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  .roster-empty {
+    text-align: center;
+    padding: 22px 14px;
+    color: var(--text-mute);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--bg-2);
+    border-radius: 5px;
+    border: 1px dashed var(--line);
+  }
+
+  @media (max-width: 1100px) {
+    .roster-grid { grid-template-columns: 1fr; gap: 14px; }
+  }
+
   /* Insights */
   .insights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   .insight { padding: 22px; background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--radius-m); border-top: 3px solid var(--accent); }
@@ -1144,6 +1304,16 @@
     .side-panel { padding: 12px 14px !important; page-break-inside: avoid; }
     .tl-time { font-size: 12px !important; }
     .tl-change { font-size: 9.5px !important; }
+    .roster-panel { padding: 12px 14px !important; margin-top: 12px !important; page-break-inside: avoid; }
+    .roster-grid { gap: 8px !important; }
+    .roster-row { padding: 5px 7px !important; }
+    .roster-name { font-size: 9.5px !important; }
+    .roster-meta { font-size: 8.5px !important; }
+    .roster-dorsal { font-size: 10px !important; padding: 2px 0 !important; }
+    .roster-stats { font-size: 9px !important; }
+    .roster-title { font-size: 12px !important; }
+    .roster-summary { font-size: 9px !important; gap: 8px !important; }
+    .col-tag { font-size: 8.5px !important; padding: 1px 5px !important; }
   }
   body.printing .view { display: block !important; }
 </style>
@@ -1261,14 +1431,14 @@
         <span class="insight-tag">GOLEADOR</span>
         <div class="insight-title">K. Valencia: referente ofensivo</div>
         <div class="insight-body">
-          El <strong>#21</strong> suma <strong>4 goles en 5 fechas</strong> (F1 45+1', F3 3' y 57', F4 75'). Titular indiscutido en el tridente ofensivo, presente en cada XI con 390 minutos hasta F4. Es la principal arma de gol de Vanegas.
+          El <strong>#21</strong> suma <strong>4 goles en 5 fechas</strong> (F1 45+1', F3 3' y 57', F4 75'). Titular indiscutido en el tridente ofensivo y autor del gol decisivo en el <strong>0-1 vs Gualaceo</strong> en F1, sumando 3 puntos clave de visita. Es la principal arma de gol de Vanegas.
         </div>
       </div>
       <div class="insight">
         <span class="insight-tag">ESTRUCTURA</span>
         <div class="insight-title">Eje central inamovible</div>
         <div class="insight-body">
-          <strong>Villafuerte (#12)</strong> en portería, <strong>Garcete (#20)</strong> en la zaga y <strong>Medina (#5)</strong> como capitán en mediocampo son los tres pilares con <strong>5 titularidades de 5</strong>. Garcete nunca sale; Medina es sustituido solo en F3 (80') y F5 (83').
+          <strong>Villafuerte (#12)</strong> en portería, <strong>Garcete (#20)</strong> en la zaga y <strong>Medina (#5)</strong> en mediocampo son los tres pilares con presencia en todas las jornadas (Garcete jamás sustituido, 450 min). El capitanato lo lleva <strong>Preciado (©) en F1–F4</strong>; en F5, ante su ausencia del XI, <strong>Medina asume la cinta</strong>.
         </div>
       </div>
       <div class="insight">
@@ -1301,17 +1471,17 @@ const CLUB = "CUENCA JRS";
 const MATCHES = [
   {
     id: 1, round: "01", date: "2025", rival: "GUALACEO", formation: "4-3-3",
-    result: null, // PJ — sin dato de resultado
+    result: { home: 0, away: 1, venue: "away", points: 3 },
     starters: [
-      { n: 12, name: "J. VILLAFUERTE", full: "VILLAFUERTE FARIAS, JONATHAN G.", pos: "GK", x: 50, y: 12, minOut: 90 },
+      { n: 12, name: "J. VILLAFUERTE", full: "VILLAFUERTE FARIAS, JONATHAN G.", pos: "GK", x: 50, y: 12, minOut: 90, yellow: "75'" },
       { n: 55, name: "S. MOSQUERA",    full: "MOSQUERA MONTEZUMA, STICK F.",   pos: "LB", x: 20, y: 32, minOut: 65 },
       { n: 14, name: "B. GONZÁLEZ",    full: "GONZÁLEZ TUNJA, BRYAN D.",       pos: "CB", x: 40, y: 32, minOut: 90 },
-      { n: 20, name: "E. GARCETE",     full: "GARCETE MÉNDEZ, ELÍAS S.",       pos: "CB", x: 60, y: 32, minOut: 90 },
+      { n: 20, name: "E. GARCETE",     full: "GARCETE MÉNDEZ, ELÍAS S.",       pos: "CB", x: 60, y: 32, minOut: 90, yellow: "80'" },
       { n: 27, name: "O. MANTILLA",    full: "MANTILLA PINCAY, OSWALDO M.",    pos: "RB", x: 80, y: 32, minOut: 90 },
       { n: 33, name: "H. MERCADO",     full: "MERCADO CABEZA, HENRRY A.",      pos: "CM", x: 30, y: 58, minOut: 72 },
-      { n: 5,  name: "J. MEDINA",      full: "MEDINA SOLÍS, JOHN JAIRO",       pos: "CM", x: 50, y: 58, minOut: 90, captain: true },
+      { n: 5,  name: "J. MEDINA",      full: "MEDINA SOLÍS, JOHN JAIRO",       pos: "CM", x: 50, y: 58, minOut: 90 },
       { n: 7,  name: "E. ZAMBRANO",    full: "ZAMBRANO MENDOZA, EDWIN F.",     pos: "CM", x: 70, y: 58, minOut: 90 },
-      { n: 10, name: "J. PRECIADO",    full: "PRECIADO FARES, JESÚS A.",       pos: "LW", x: 25, y: 84, minOut: 80 },
+      { n: 10, name: "J. PRECIADO",    full: "PRECIADO FARES, JESÚS A.",       pos: "LW", x: 25, y: 84, minOut: 80, captain: true },
       { n: 21, name: "K. VALENCIA",    full: "VALENCIA BATIOJA, KEVIN J.",     pos: "ST", x: 50, y: 84, minOut: 90, goal: "45+1'" },
       { n: 11, name: "J. UCHUARI",     full: "UCHUARI PINTADO, JONNY A.",      pos: "RW", x: 75, y: 84, minOut: 65 },
     ],
@@ -1321,8 +1491,20 @@ const MATCHES = [
       { time: 72, outN: 33, outName: "MERCADO",  inN: 25, inName: "ORTIZ" },
       { time: 80, outN: 10, outName: "PRECIADO", inN: 13, inName: "JARAMILLO" },
     ],
+    bench: [
+      { n: 1,  name: "D. QUIÑONEZ",   full: "QUIÑONEZ VALENCIA, DENZEL W.",    pos: "GK" },
+      { n: 3,  name: "K. NAZARENO",   full: "NAZARENO COROZO, KEVIN R.",       pos: "DEF" },
+      { n: 8,  name: "C. ALVARADO",   full: "ALVARADO CALDERÓN, CARLOS E.",    pos: "MID" },
+      { n: 19, name: "A. BONILLA",    full: "BONILLA BALDEÓN, ARIEL N.",       pos: "MID" },
+      { n: 22, name: "G. MALDONADO",  full: "MALDONADO, GONZALO G.",           pos: "FWD" },
+      { n: 23, name: "L. MARTÍNEZ",   full: "MARTÍNEZ GONZÁLEZ, LUIZ M.",      pos: "DEF" },
+      { n: 50, name: "S. MÁRQUEZ",    full: "MÁRQUEZ TEJERO, SAIRY G.",        pos: "FWD" },
+      { n: 77, name: "A. PIRELA",     full: "PIRELA CARROZ, ALBERTO J.",       pos: "FWD" },
+    ],
     events: [
-      { time: "45+1'", type: "goal", text: "GOL de K. VALENCIA", dorsal: 21, icon: "⚽" },
+      { time: "45+1'", type: "goal",   text: "GOL de K. VALENCIA",     dorsal: 21, icon: "⚽" },
+      { time: "75'",   type: "yellow", text: "Amarilla J. VILLAFUERTE", dorsal: 12, icon: "🟨" },
+      { time: "80'",   type: "yellow", text: "Amarilla E. GARCETE",     dorsal: 20, icon: "🟨" },
     ],
   },
   {
@@ -1335,9 +1517,9 @@ const MATCHES = [
       { n: 20, name: "E. GARCETE",     full: "GARCETE MÉNDEZ, ELÍAS S.",       pos: "CB", x: 60, y: 32, minOut: 90 },
       { n: 27, name: "O. MANTILLA",    full: "MANTILLA PINCAY, OSWALDO M.",    pos: "RB", x: 80, y: 32, minOut: 90 },
       { n: 55, name: "S. MOSQUERA",    full: "MOSQUERA MONTEZUMA, STICK F.",   pos: "CM", x: 30, y: 58, minOut: 46, yellow: "8'" },
-      { n: 5,  name: "J. MEDINA",      full: "MEDINA SOLÍS, JOHN JAIRO",       pos: "CM", x: 50, y: 58, minOut: 90, captain: true },
+      { n: 5,  name: "J. MEDINA",      full: "MEDINA SOLÍS, JOHN JAIRO",       pos: "CM", x: 50, y: 58, minOut: 90 },
       { n: 7,  name: "E. ZAMBRANO",    full: "ZAMBRANO MENDOZA, EDWIN F.",     pos: "CM", x: 70, y: 58, minOut: 68 },
-      { n: 10, name: "J. PRECIADO",    full: "PRECIADO FARES, JESÚS A.",       pos: "LW", x: 25, y: 84, minOut: 90, yellow: "61'" },
+      { n: 10, name: "J. PRECIADO",    full: "PRECIADO FARES, JESÚS A.",       pos: "LW", x: 25, y: 84, minOut: 90, yellow: "61'", captain: true },
       { n: 21, name: "K. VALENCIA",    full: "VALENCIA BATIOJA, KEVIN J.",     pos: "ST", x: 50, y: 84, minOut: 90 },
       { n: 11, name: "J. UCHUARI",     full: "UCHUARI PINTADO, JONNY A.",      pos: "RW", x: 75, y: 84, minOut: 68 },
     ],
@@ -1347,9 +1529,19 @@ const MATCHES = [
       { time: 68, outN: 7,  outName: "ZAMBRANO",  inN: 19, inName: "BONILLA" },
       { time: 68, outN: 11, outName: "UCHUARI",   inN: 50, inName: "MÁRQUEZ" },
     ],
+    bench: [
+      { n: 1,  name: "D. QUIÑONEZ",   full: "QUIÑONEZ VALENCIA, DENZEL W.",    pos: "GK"  },
+      { n: 8,  name: "C. ALVARADO",   full: "ALVARADO CALDERÓN, CARLOS E.",    pos: "MID" },
+      { n: 16, name: "J. GUILLÉN",    full: "GUILLÉN ALBARRACÍN, JUAN A.",     pos: "MID" },
+      { n: 22, name: "G. MALDONADO",  full: "MALDONADO, GONZALO G.",           pos: "FWD" },
+      { n: 23, name: "L. MARTÍNEZ",   full: "MARTÍNEZ GONZÁLEZ, LUIZ M.",      pos: "DEF" },
+      { n: 24, name: "M. SUELDO",     full: "SUELDO, MARTINIANO A.",           pos: "MID" },
+      { n: 54, name: "A. BENNET",     full: "BENNET CAJAMARCA, ADALBERTO V.",  pos: "DEF" },
+      { n: 99, name: "D. BONE",       full: "BONE CASTILLO, DARWIN J.",        pos: "FWD" },
+    ],
     events: [
-      { time: "8'",  type: "yellow", text: "Amarilla S. MOSQUERA",  dorsal: 55, icon: "🟨" },
-      { time: "61'", type: "yellow", text: "Amarilla J. PRECIADO",  dorsal: 10, icon: "🟨" },
+      { time: "8'",  type: "yellow", text: "Amarilla S. MOSQUERA", dorsal: 55, icon: "🟨" },
+      { time: "61'", type: "yellow", text: "Amarilla J. PRECIADO", dorsal: 10, icon: "🟨" },
     ],
   },
   {
@@ -1362,9 +1554,9 @@ const MATCHES = [
       { n: 20, name: "E. GARCETE",     full: "GARCETE MÉNDEZ, ELÍAS S.",       pos: "CB", x: 60, y: 32, minOut: 90 },
       { n: 3,  name: "K. NAZARENO",    full: "NAZARENO COROZO, KEVIN R.",      pos: "RB", x: 80, y: 32, minOut: 90 },
       { n: 33, name: "H. MERCADO",     full: "MERCADO CABEZA, HENRRY A.",      pos: "CM", x: 30, y: 58, minOut: 90, yellow: "59'" },
-      { n: 5,  name: "J. MEDINA",      full: "MEDINA SOLÍS, JOHN JAIRO",       pos: "CM", x: 50, y: 58, minOut: 80, captain: true },
+      { n: 5,  name: "J. MEDINA",      full: "MEDINA SOLÍS, JOHN JAIRO",       pos: "CM", x: 50, y: 58, minOut: 80 },
       { n: 7,  name: "E. ZAMBRANO",    full: "ZAMBRANO MENDOZA, EDWIN F.",     pos: "CM", x: 70, y: 58, minOut: 65 },
-      { n: 10, name: "J. PRECIADO",    full: "PRECIADO FARES, JESÚS A.",       pos: "LW", x: 25, y: 84, minOut: 80 },
+      { n: 10, name: "J. PRECIADO",    full: "PRECIADO FARES, JESÚS A.",       pos: "LW", x: 25, y: 84, minOut: 80, captain: true },
       { n: 21, name: "K. VALENCIA",    full: "VALENCIA BATIOJA, KEVIN J.",     pos: "ST", x: 50, y: 84, minOut: 80, goal: "3', 57'" },
       { n: 11, name: "J. UCHUARI",     full: "UCHUARI PINTADO, JONNY A.",      pos: "RW", x: 75, y: 84, minOut: 75 },
     ],
@@ -1375,11 +1567,19 @@ const MATCHES = [
       { time: 80, outN: 21, outName: "VALENCIA", inN: 22, inName: "MALDONADO" },
       { time: 80, outN: 10, outName: "PRECIADO", inN: 99, inName: "BONE" },
     ],
+    bench: [
+      { n: 1,  name: "D. QUIÑONEZ",   full: "QUIÑONEZ VALENCIA, DENZEL W.",    pos: "GK"  },
+      { n: 16, name: "J. GUILLÉN",    full: "GUILLÉN ALBARRACÍN, JUAN A.",     pos: "MID" },
+      { n: 19, name: "A. BONILLA",    full: "BONILLA BALDEÓN, ARIEL N.",       pos: "MID" },
+      { n: 23, name: "L. MARTÍNEZ",   full: "MARTÍNEZ GONZÁLEZ, LUIZ M.",      pos: "DEF" },
+      { n: 24, name: "M. SUELDO",     full: "SUELDO, MARTINIANO A.",           pos: "MID" },
+      { n: 54, name: "A. BENNET",     full: "BENNET CAJAMARCA, ADALBERTO V.",  pos: "DEF" },
+    ],
     events: [
-      { time: "3'",  type: "goal",   text: "GOL de K. VALENCIA", dorsal: 21, icon: "⚽" },
-      { time: "57'", type: "goal",   text: "GOL de K. VALENCIA", dorsal: 21, icon: "⚽" },
+      { time: "3'",  type: "goal",   text: "GOL de K. VALENCIA",  dorsal: 21, icon: "⚽" },
+      { time: "57'", type: "goal",   text: "GOL de K. VALENCIA",  dorsal: 21, icon: "⚽" },
       { time: "59'", type: "yellow", text: "Amarilla H. MERCADO", dorsal: 33, icon: "🟨" },
-      { time: "70'", type: "yellow", text: "Amarilla O. MANTILLA", dorsal: 27, icon: "🟨" },
+      { time: "70'", type: "yellow", text: "Amarilla O. MANTILLA (ingresó 65')", dorsal: 27, icon: "🟨" },
     ],
   },
   {
@@ -1392,9 +1592,9 @@ const MATCHES = [
       { n: 20, name: "E. GARCETE",     full: "GARCETE MÉNDEZ, ELÍAS S.",       pos: "CB", x: 60, y: 32, minOut: 90 },
       { n: 3,  name: "K. NAZARENO",    full: "NAZARENO COROZO, KEVIN R.",      pos: "RB", x: 80, y: 32, minOut: 90, yellow: "2'" },
       { n: 33, name: "H. MERCADO",     full: "MERCADO CABEZA, HENRRY A.",      pos: "CM", x: 30, y: 58, minOut: 90 },
-      { n: 5,  name: "J. MEDINA",      full: "MEDINA SOLÍS, JOHN JAIRO",       pos: "CM", x: 50, y: 58, minOut: 65, captain: true, yellow: "61'" },
+      { n: 5,  name: "J. MEDINA",      full: "MEDINA SOLÍS, JOHN JAIRO",       pos: "CM", x: 50, y: 58, minOut: 65, yellow: "61'" },
       { n: 7,  name: "E. ZAMBRANO",    full: "ZAMBRANO MENDOZA, EDWIN F.",     pos: "CM", x: 70, y: 58, minOut: 50 },
-      { n: 10, name: "J. PRECIADO",    full: "PRECIADO FARES, JESÚS A.",       pos: "LW", x: 25, y: 84, minOut: 82, goal: "35'", yellow: "82'" },
+      { n: 10, name: "J. PRECIADO",    full: "PRECIADO FARES, JESÚS A.",       pos: "LW", x: 25, y: 84, minOut: 82, goal: "35'", yellow: "82'", captain: true },
       { n: 21, name: "K. VALENCIA",    full: "VALENCIA BATIOJA, KEVIN J.",     pos: "ST", x: 50, y: 84, minOut: 82, goal: "75'" },
       { n: 11, name: "J. UCHUARI",     full: "UCHUARI PINTADO, JONNY A.",      pos: "RW", x: 75, y: 84, minOut: 65 },
     ],
@@ -1404,6 +1604,15 @@ const MATCHES = [
       { time: 65, outN: 11, outName: "UCHUARI",  inN: 99, inName: "BONE" },
       { time: 82, outN: 21, outName: "VALENCIA", inN: 8,  inName: "ALVARADO" },
       { time: 82, outN: 10, outName: "PRECIADO", inN: 24, inName: "SUELDO" },
+    ],
+    bench: [
+      { n: 1,  name: "D. QUIÑONEZ",   full: "QUIÑONEZ VALENCIA, DENZEL W.",    pos: "GK"  },
+      { n: 16, name: "J. GUILLÉN",    full: "GUILLÉN ALBARRACÍN, JUAN A.",     pos: "MID" },
+      { n: 19, name: "A. BONILLA",    full: "BONILLA BALDEÓN, ARIEL N.",       pos: "MID" },
+      { n: 22, name: "G. MALDONADO",  full: "MALDONADO, GONZALO G.",           pos: "FWD" },
+      { n: 23, name: "L. MARTÍNEZ",   full: "MARTÍNEZ GONZÁLEZ, LUIZ M.",      pos: "DEF" },
+      { n: 50, name: "S. MÁRQUEZ",    full: "MÁRQUEZ TEJERO, SAIRY G.",        pos: "FWD" },
+      { n: 54, name: "A. BENNET",     full: "BENNET CAJAMARCA, ADALBERTO V.",  pos: "DEF" },
     ],
     events: [
       { time: "2'",  type: "yellow", text: "Amarilla K. NAZARENO", dorsal: 3,  icon: "🟨" },
@@ -1431,16 +1640,25 @@ const MATCHES = [
     ],
     subs: [
       { time: 46, outN: 99, outName: "BONE",     inN: 55, inName: "MOSQUERA", yellowIn: "63'" },
-      { time: 76, outN: 11, outName: "UCHUARI",  inN: 50, inName: "MÁRQUEZ", yellowIn: "90'" },
+      { time: 76, outN: 11, outName: "UCHUARI",  inN: 50, inName: "MÁRQUEZ",  yellowIn: "90+2'" },
       { time: 83, outN: 5,  outName: "MEDINA",   inN: 8,  inName: "ALVARADO" },
       { time: 87, outN: 3,  outName: "NAZARENO", inN: 14, inName: "GONZÁLEZ" },
       { time: 87, outN: 27, outName: "MANTILLA", inN: 19, inName: "BONILLA" },
     ],
+    bench: [
+      { n: 1,  name: "D. QUIÑONEZ",   full: "QUIÑONEZ VALENCIA, DENZEL W.",    pos: "GK"  },
+      { n: 13, name: "M. JARAMILLO",  full: "JARAMILLO LASTRA, MARCELO A.",    pos: "MID" },
+      { n: 22, name: "G. MALDONADO",  full: "MALDONADO, GONZALO G.",           pos: "FWD" },
+      { n: 23, name: "L. MARTÍNEZ",   full: "MARTÍNEZ GONZÁLEZ, LUIZ M.",      pos: "DEF" },
+      { n: 24, name: "M. SUELDO",     full: "SUELDO, MARTINIANO A.",           pos: "MID" },
+      { n: 54, name: "A. BENNET",     full: "BENNET CAJAMARCA, ADALBERTO V.",  pos: "DEF" },
+      { n: 77, name: "A. PIRELA",     full: "PIRELA CARROZ, ALBERTO J.",       pos: "FWD" },
+    ],
     events: [
-      { time: "45+2'", type: "goal",   text: "GOL de J. UCHUARI",   dorsal: 11, icon: "⚽" },
-      { time: "51'",   type: "yellow", text: "Amarilla K. NAZARENO", dorsal: 3,  icon: "🟨" },
-      { time: "63'",   type: "yellow", text: "Amarilla S. MOSQUERA", dorsal: 55, icon: "🟨" },
-      { time: "90'",   type: "yellow", text: "Amarilla MÁRQUEZ",     dorsal: 50, icon: "🟨" },
+      { time: "45+2'", type: "goal",   text: "GOL de J. UCHUARI",      dorsal: 11, icon: "⚽" },
+      { time: "51'",   type: "yellow", text: "Amarilla K. NAZARENO",   dorsal: 3,  icon: "🟨" },
+      { time: "63'",   type: "yellow", text: "Amarilla S. MOSQUERA (ingresó 46')", dorsal: 55, icon: "🟨" },
+      { time: "90+2'", type: "yellow", text: "Amarilla S. MÁRQUEZ (ingresó 76')",  dorsal: 50, icon: "🟨" },
     ],
   },
 ];
@@ -1506,12 +1724,17 @@ computeKPIs();
 function resultInfo(m) {
   if (!m.result) return { myScore: '?', rivalScore: '?', cls: 'tbd', label: 'PJ', venue: '—' };
   const { home, away, venue } = m.result;
+  const venueLabel = venue === "home" ? "LOCAL" : "VISITANTE";
+  // Caso: venue conocido pero marcador pendiente
+  if (home === undefined || away === undefined) {
+    return { myScore: '?', rivalScore: '?', cls: 'tbd', label: 'PJ', venue: venueLabel };
+  }
   const my = venue === "home" ? home : away;
   const rv = venue === "home" ? away : home;
   let cls = "draw";
   if (my > rv) cls = "win";
   else if (my < rv) cls = "loss";
-  return { myScore: my, rivalScore: rv, cls, label: `${my}-${rv}`, venue: venue === "home" ? "LOCAL" : "VISITANTE" };
+  return { myScore: my, rivalScore: rv, cls, label: `${my}-${rv}`, venue: venueLabel };
 }
 
 // =========================================================
@@ -1571,29 +1794,111 @@ function renderMatchView(m) {
       `).join('')
     : `<div class="event-empty">Sin eventos destacados</div>`;
 
-  const scoreboardHTML = m.result
-    ? (m.result.venue === "home"
-        ? `<div class="scoreboard">
-            <span class="sb-team mine">${CLUB}</span>
-            <div class="sb-score-wrap"><span class="sb-score ${ri.cls}">${m.result.home}</span><span class="sb-sep">—</span><span class="sb-score ${ri.cls === 'win' ? 'loss' : ri.cls === 'loss' ? 'win' : 'draw'}">${m.result.away}</span></div>
-            <span class="sb-team rival">${m.rival}</span>
-          </div>`
-        : `<div class="scoreboard">
-            <span class="sb-team rival">${m.rival}</span>
-            <div class="sb-score-wrap"><span class="sb-score ${ri.cls === 'win' ? 'loss' : ri.cls === 'loss' ? 'win' : 'draw'}">${m.result.home}</span><span class="sb-sep">—</span><span class="sb-score ${ri.cls}">${m.result.away}</span></div>
-            <span class="sb-team mine">${CLUB}</span>
-          </div>`)
-    : `<div class="fixture-matchup">${CLUB} <span class="vs">VS</span> ${m.rival}</div>`;
+  const hasFullResult = m.result && m.result.home !== undefined && m.result.away !== undefined;
+  const hasVenue = m.result && m.result.venue;
 
-  const resultBadgeHTML = m.result
-    ? `<div style="display:flex; align-items:center;">
+  let scoreboardHTML;
+  if (hasFullResult) {
+    scoreboardHTML = m.result.venue === "home"
+      ? `<div class="scoreboard">
+          <span class="sb-team mine">${CLUB}</span>
+          <div class="sb-score-wrap"><span class="sb-score ${ri.cls}">${m.result.home}</span><span class="sb-sep">—</span><span class="sb-score ${ri.cls === 'win' ? 'loss' : ri.cls === 'loss' ? 'win' : 'draw'}">${m.result.away}</span></div>
+          <span class="sb-team rival">${m.rival}</span>
+        </div>`
+      : `<div class="scoreboard">
+          <span class="sb-team rival">${m.rival}</span>
+          <div class="sb-score-wrap"><span class="sb-score ${ri.cls === 'win' ? 'loss' : ri.cls === 'loss' ? 'win' : 'draw'}">${m.result.home}</span><span class="sb-sep">—</span><span class="sb-score ${ri.cls}">${m.result.away}</span></div>
+          <span class="sb-team mine">${CLUB}</span>
+        </div>`;
+  } else if (hasVenue && m.result.venue === "away") {
+    scoreboardHTML = `<div class="scoreboard">
+        <span class="sb-team rival">${m.rival}</span>
+        <div class="sb-score-wrap"><span class="sb-score draw">?</span><span class="sb-sep">—</span><span class="sb-score draw">?</span></div>
+        <span class="sb-team mine">${CLUB}</span>
+      </div>`;
+  } else if (hasVenue && m.result.venue === "home") {
+    scoreboardHTML = `<div class="scoreboard">
+        <span class="sb-team mine">${CLUB}</span>
+        <div class="sb-score-wrap"><span class="sb-score draw">?</span><span class="sb-sep">—</span><span class="sb-score draw">?</span></div>
+        <span class="sb-team rival">${m.rival}</span>
+      </div>`;
+  } else {
+    scoreboardHTML = `<div class="fixture-matchup">${CLUB} <span class="vs">VS</span> ${m.rival}</div>`;
+  }
+
+  let resultBadgeHTML;
+  if (hasFullResult) {
+    resultBadgeHTML = `<div style="display:flex; align-items:center;">
         <span class="result-badge ${ri.cls}">
           ${ri.cls === 'win' ? '● VICTORIA' : ri.cls === 'draw' ? '● EMPATE' : '● DERROTA'}
           · ${m.result.points} pts
         </span>
         <span class="result-venue">${ri.venue}</span>
-      </div>`
-    : `<span class="result-badge tbd">● RESULTADO PENDIENTE</span>`;
+      </div>`;
+  } else if (hasVenue) {
+    resultBadgeHTML = `<div style="display:flex; align-items:center;">
+        <span class="result-badge tbd">● MARCADOR PENDIENTE</span>
+        <span class="result-venue">${ri.venue}</span>
+      </div>`;
+  } else {
+    resultBadgeHTML = `<span class="result-badge tbd">● SIN DATOS</span>`;
+  }
+
+  // ===== Plantilla convocada (roster completo) =====
+  // Titulares
+  const rosterStartersHTML = m.starters.slice().sort((a,b) => a.y - b.y).map(p => `
+    <div class="roster-row is-starter ${p.pos === 'GK' ? 'is-gk' : ''} ${p.captain ? 'is-captain' : ''}">
+      <div class="roster-dorsal">${p.n}</div>
+      <div>
+        <div class="roster-name">${p.name}${p.captain ? ' <span style="color:var(--warn);font-size:10px;">©</span>' : ''}</div>
+        <div class="roster-meta">${p.pos} · ${p.full || p.name}</div>
+      </div>
+      <div class="roster-stats">
+        ${p.goal ? `<span class="roster-icon" title="Gol ${p.goal}">⚽</span>` : ''}
+        ${p.yellow ? `<span class="xi-yellow" title="Amarilla ${p.yellow}"></span>` : ''}
+        <span class="roster-min">${p.minOut}'</span>
+      </div>
+    </div>
+  `).join('');
+
+  // Suplentes que ingresaron (subs.in)
+  const rosterSubsInHTML = m.subs.length
+    ? m.subs.slice().sort((a,b) => a.time - b.time).map(s => {
+        const minsIn = Math.max(0, 90 - s.time);
+        const inTime = s.time >= 90 ? `90+${s.time - 90}` : s.time;
+        return `
+          <div class="roster-row is-subin">
+            <div class="roster-dorsal">${s.inN}</div>
+            <div>
+              <div class="roster-name">${s.inName}</div>
+              <div class="roster-meta">Ingresó ${inTime}' por #${s.outN} ${s.outName}</div>
+            </div>
+            <div class="roster-stats">
+              ${s.yellowIn ? `<span class="xi-yellow" title="Amarilla ${s.yellowIn}"></span>` : ''}
+              <span class="roster-min">${minsIn}'</span>
+            </div>
+          </div>
+        `;
+      }).join('')
+    : `<div class="roster-empty">Sin recambios utilizados</div>`;
+
+  // Suplentes en banco no utilizados
+  const rosterBenchHTML = (m.bench && m.bench.length)
+    ? m.bench.map(b => `
+        <div class="roster-row">
+          <div class="roster-dorsal">${b.n}</div>
+          <div>
+            <div class="roster-name">${b.name}</div>
+            <div class="roster-meta">${b.pos || 'SUB'} · No ingresó</div>
+          </div>
+          <div class="roster-stats">
+            <span style="color:var(--text-mute);">0'</span>
+          </div>
+        </div>
+      `).join('')
+    : `<div class="roster-empty">Datos de banco no disponibles<br><span style="opacity:0.6">(suplentes que no ingresaron)</span></div>`;
+
+  const totalConvocados = 11 + m.subs.length + ((m.bench && m.bench.length) || 0);
 
   el.innerHTML = `
     <button class="back-btn" onclick="setView('dashboard')">← Volver al dashboard</button>
@@ -1639,6 +1944,45 @@ function renderMatchView(m) {
         </div>
       </div>
     </div>
+
+    <div class="roster-panel">
+      <div class="roster-head">
+        <div class="roster-title">
+          <div class="roster-title-icon">📋</div>
+          Plantilla Convocada · Listado Completo
+        </div>
+        <div class="roster-summary">
+          <div><strong>${totalConvocados}</strong>Convocados</div>
+          <div><strong>11</strong>Titulares</div>
+          <div><strong>${m.subs.length + ((m.bench && m.bench.length) || 0)}</strong>Suplentes</div>
+          <div><strong>${m.subs.length}</strong>Ingresaron</div>
+          <div><strong>${(m.bench && m.bench.length) || 0}</strong>No jugaron</div>
+        </div>
+      </div>
+      <div class="roster-grid">
+        <div>
+          <div class="roster-col-head">
+            XI Titular
+            <span class="col-tag starter">11 JUG.</span>
+          </div>
+          <div class="roster-list">${rosterStartersHTML}</div>
+        </div>
+        <div>
+          <div class="roster-col-head">
+            Suplentes que ingresaron
+            <span class="col-tag subin">${m.subs.length} JUG.</span>
+          </div>
+          <div class="roster-list">${rosterSubsInHTML}</div>
+        </div>
+        <div>
+          <div class="roster-col-head">
+            Suplentes en banco · No jugaron
+            <span class="col-tag bench">${(m.bench && m.bench.length) || 0} JUG.</span>
+          </div>
+          <div class="roster-list">${rosterBenchHTML}</div>
+        </div>
+      </div>
+    </div>
   `;
 }
 MATCHES.forEach(renderMatchView);
@@ -1656,7 +2000,8 @@ function renderMatchCards() {
       return `<div class="mini-player ${cls.join(' ')}" style="left:${p.x}%;top:${p.y}%;">${p.n}</div>`;
     }).join('');
     const ri = resultInfo(m);
-    const scoreLabel = m.result ? `${ri.myScore} — ${ri.rivalScore}` : 'PJ';
+    const hasFullScore = m.result && m.result.home !== undefined && m.result.away !== undefined;
+    const scoreLabel = hasFullScore ? `${ri.myScore} — ${ri.rivalScore}` : 'PJ';
     const goalCount = m.starters.filter(p => p.goal).length;
     const yellowCount = m.starters.filter(p => p.yellow).length + m.subs.filter(s => s.yellowIn).length;
     const isWide = MATCHES.length % 2 === 1 && i === MATCHES.length - 1;
@@ -1668,7 +2013,7 @@ function renderMatchCards() {
           <span class="mc-result ${ri.cls}">${scoreLabel}</span>
         </div>
         <div class="match-rival">vs ${m.rival}</div>
-        <div class="match-formation">SISTEMA · ${m.formation} ${m.result ? `· ${ri.venue}` : ''}</div>
+        <div class="match-formation">SISTEMA · ${m.formation}${m.result && m.result.venue ? ` · ${ri.venue}` : ''}</div>
         <div class="mini-pitch">${mini}</div>
         <div class="match-stats">
           <div class="ms-item"><div class="ms-value">${m.subs.length}</div><div class="ms-label">Cambios</div></div>
